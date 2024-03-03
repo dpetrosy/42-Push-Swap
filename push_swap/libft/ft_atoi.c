@@ -3,75 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gverdyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/17 04:19:33 by gverdyan          #+#    #+#             */
-/*   Updated: 2022/03/20 13:48:15 by gverdyan         ###   ########.fr       */
+/*   Created: 2024/01/24 17:50:22 by dapetros          #+#    #+#             */
+/*   Updated: 2024/01/24 17:52:18 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-static int	is_space(const char c)
+int	ft_atoi(char *str)
 {
-	if (c == ' ' || c == '\n' || c == '\t'
-		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
+	int		sign;
+	int		num;
+	int		i;
 
-static int	init_number(int i, const char *str, int sign)
-{
-	int	number;
-
-	number = 0;
-	while (str[i] != '\0' && ft_isdigit(str[i]))
-	{
-		number = number * 10 + str[i] - '0';
-		i++;
-	}
-	return (sign * number);
-}
-
-static int	init_sign(int i, const char *str)
-{
-	int	sign;
-	int	is_signed;
-
-	is_signed = 0;
-	sign = 1;
-	if (!is_signed && str[i] == '+')
-		is_signed = 1;
-	if (!is_signed && str[i] == '-')
-	{
-		sign = -1;
-		is_signed = 1;
-	}
-	return (sign);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	sign;
-	int	i;
-
-	sign = 1;
 	i = 0;
-	while (is_space(str[i]))
-		i++;
-	sign = init_sign(i, str);
-	if (str[i] == '+' || str[i] == '-')
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		++i;
-	while (str[i])
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
+	if (str[i] < '0' || str[i] > '9')
+		return (0);
+	num = 0;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (ft_isdigit(str[i]))
-			return (init_number(i, str, sign));
-		else
-			break ;
+		num *= 10;
+		num = num + (str[i] - '0');
+		++i;
 	}
-	return (0);
+	return (num * sign);
 }

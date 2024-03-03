@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gverdyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 14:31:17 by gverdyan          #+#    #+#             */
-/*   Updated: 2022/08/12 15:25:53 by gverdyan         ###   ########.fr       */
+/*   Created: 2024/01/24 21:19:22 by dapetros          #+#    #+#             */
+/*   Updated: 2024/01/24 21:19:23 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_putchar(char c, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	write(fd, &c, 1);
-}
+	long	num;
+	char	c;
 
-void	ft_putnbr_fd(int nb, int fd)
-{
-	int	max;
-
-	max = 1;
-	if (nb < 0 && nb / 10 == 0)
-		ft_putchar('-', fd);
-	if (nb < 0)
-		max = -1;
-	if (nb / 10 != 0)
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putchar(((nb % 10) * max) + '0', fd);
+	num = n;
+	if (num < 0)
+	{
+		write (fd, "-", 1);
+		num *= -1;
+	}
+	if (num / 10)
+		ft_putnbr_fd(num / 10, fd);
+	c = num % 10 + '0';
+	write (fd, &c, 1);
 }

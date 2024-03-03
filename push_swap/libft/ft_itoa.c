@@ -3,81 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gverdyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 14:26:56 by gverdyan          #+#    #+#             */
-/*   Updated: 2022/03/24 21:28:08 by gverdyan         ###   ########.fr       */
+/*   Created: 2024/01/24 22:06:01 by dapetros          #+#    #+#             */
+/*   Updated: 2024/01/24 22:07:06 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_strrev(char *str, size_t start, size_t end)
+static size_t	get_num_size(long num)
 {
-	char	t;
+	size_t	size;
 
+	size = 0;
+	if (num == 0)
+		return (1);
+	while (num)
+	{
+		++size;
+		num /= 10;
+	}
+	return (size);
+}
+
+static void	ft_strrev(char *str, size_t index, size_t i)
+{
+	size_t	start;
+	size_t	end;	
+	char	temp;
+
+	end = i - 1;
+	start = index;
 	while (start < end)
 	{
-		t = str[start];
-		str[start++] = str[end];
-		str[end--] = t;
+		temp = str[start];
+		str[start] = str[end];
+		str[end] = temp;
+		++start;
+		--end;
 	}
 }
 
-static void	solution(long int n, size_t index, char *s)
+static void	get_str(char *str, size_t index, long num)
 {
 	size_t	i;
 
 	i = index;
-	if (n == 0)
+	if (num == 0)
 	{
-		s[0] = '0';
-		return ;
+		str[0] = '0';
+		++i;
 	}
-	while (n)
+	else
 	{
-		s[i] = n % 10 + '0';
-		n /= 10;
-		i++;
+		while (num != 0)
+		{
+			str[i] = (num % 10) + '0';
+			num /= 10;
+			++i;
+		}
 	}
-	ft_strrev(s, index, i - 1);
-}
-
-static size_t	num_len(long int n)
-{
-	size_t	len;
-
-	len = 0;
-	if (n <= 0)
-		len = 1;
-	while (n)
-	{
-		len++;
-		n /= 10;
-	}
-	return (len);
+	str[i] = '\0';
+	ft_strrev(str, index, i);
 }
 
 char	*ft_itoa(int n)
 {
-	long int	num;
-	char		*s;
-	size_t		len;
-	size_t		index;
+	size_t	num_size;
+	size_t	start_index;
+	int		sign;
+	long	num;
+	char	*str;
 
 	num = n;
-	len = num_len(num);
-	s = (char *)malloc((len + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	index = 0;
+	sign = 1;
+	start_index = 0;
+	num_size = get_num_size(num);
 	if (num < 0)
 	{
-		s[0] = '-';
-		++index;
-		num *= -1;
+		sign = -1;
+		start_index = 1;
+		++num_size;
+		num = -num;
 	}
-	s[len] = '\0';
-	solution(num, index, s);
-	return (s);
+	str = (char *)malloc(num_size + 1);
+	if (!str)
+		return (NULL);
+	if (sign == -1)
+		str[0] = '-';
+	get_str(str, start_index, num);
+	return (str);
 }

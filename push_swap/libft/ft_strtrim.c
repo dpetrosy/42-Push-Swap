@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gverdyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 11:59:22 by gverdyan          #+#    #+#             */
-/*   Updated: 2022/03/22 21:50:04 by gverdyan         ###   ########.fr       */
+/*   Created: 2024/01/24 21:00:40 by dapetros          #+#    #+#             */
+/*   Updated: 2024/01/25 14:46:49 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	size_t	start;
+	size_t	end;
 	size_t	s1_len;
-	int		start;
-	int		end;
 	char	*str;
 
-	s1_len = ft_strlen(s1);
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
+	s1_len = ft_strlen(s1);
 	while (ft_strchr(set, s1[start]) && s1[start])
 		++start;
 	end = s1_len - 1;

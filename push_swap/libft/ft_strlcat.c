@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gverdyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 17:09:15 by gverdyan          #+#    #+#             */
-/*   Updated: 2022/03/24 16:33:40 by gverdyan         ###   ########.fr       */
+/*   Created: 2024/01/23 01:01:48 by dapetros          #+#    #+#             */
+/*   Updated: 2024/01/25 15:03:46 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	src_size;
-	size_t	dst_size;
 	size_t	i;
+	size_t	j;
+	size_t	len_src;
+	size_t	len_dst;
 
-	src_size = ft_strlen(src);
-	if (!src || !dstsize)
-		return (src_size);
-	dst_size = ft_strlen(dst);
-	if (dstsize < dst_size)
-		return (src_size + dstsize);
+	if (!dst && !dstsize)
+		return (0);
+	len_src = ft_strlen(src);
+	len_dst = ft_strlen(dst);
+	if (dstsize == 0)
+		return (dstsize + len_src);
 	i = 0;
-	while (src[i] && (i + dst_size) < dstsize - 1)
-	{
-		dst[dst_size + i] = src[i];
-		i++;
-	}
-	dst[dst_size + i] = '\0';
-	return (dst_size + src_size);
+	while (dst[i] && i < dstsize)
+		++i;
+	j = 0;
+	while (src[j] && (i < dstsize - 1))
+		dst[i++] = src[j++];
+	if (i < dstsize)
+		dst[i] = '\0';
+	if (dstsize < len_dst)
+		return (len_src + dstsize);
+	return (len_src + len_dst);
 }
