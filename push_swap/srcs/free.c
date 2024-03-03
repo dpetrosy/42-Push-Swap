@@ -54,7 +54,7 @@ void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
 		free(stack->head);
 		stack->head = temp;
 	}
-	error_message("[MALLOC ERROR]: List allocation error!");
+	error_message("Error\n");
 }
 
 void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
