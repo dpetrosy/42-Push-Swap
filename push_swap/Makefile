@@ -1,18 +1,21 @@
 NAME			:= push_swap
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror -g -fsanitize=address
-INCLUDES_DIR 	:= -I$(INCLUDES_DIR) -Ilibft -Ift_printf/includes
-INCLUDES 		:= -Iincludes -Ilibft -Ift_printf/includes
+
+LIBFT_DIR		:= libft
+LIBFT_FLAGS		:= -lft -L $(LIBFT_DIR)
+FT_PRINTF_DIR	:= ft_printf
+FT_PRINTF_FLAGS	:= -lftprintf -L $(FT_PRINTF_DIR)
+
+INCLUDES_DIR 	:= includes
+INCLUDES_FLAG 	:= -I$(INCLUDES_DIR) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR)/includes
+INCLUDES		:= $(wildcard $(INCLUDES_DIR)/*.h) $(LIBFT_DIR)/libft.h \
+				   $(FT_PRINTF_DIR)/includes/ft_printf.h
+
 SRCS_DIR		:= srcs
 SRCS			:= $(wildcard $(SRCS_DIR)/*.c)
 OBJS_DIR		:= objs
 OBJS			:= $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
-LIBFT_A			:= libft.a
-LIBFT_DIR		:= libft/
-LIBFT_FLAGS		:= -lft -L $(LIBFT_DIR)
-FT_PRINTF_A		:= libftprintf.a
-FT_PRINTF_DIR	:= ft_printf/
-FT_PRINTF_FLAGS	:= -lftprintf -L $(FT_PRINTF_DIR)
 MAKE			:= make -sC
 MKDIR			:= mkdir -p
 RM				:= rm -rf
@@ -40,8 +43,8 @@ $(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(FT_PRINTF_FLAGS) -o $(NAME)
 	@echo $(YELLOW) " - Compiling FINISHED" $(RESET)
 
-$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c $(INCLUDES_DIR)/%.h | $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c $(INCLUDES) | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES_FLAG) -c $< -o $@
 
 $(OBJS_DIR) :
 	@$(MKDIR) $(OBJS_DIR)
