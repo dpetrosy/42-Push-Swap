@@ -3,15 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   bubble_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:36:21 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:36:24 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:22:38 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:22:57 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bubble_sort.h"
+#include <stdbool.h>
+#include <stdlib.h>
+#include "ft_printf.h"
+#include "libft.h"
 #include "utils.h"
+#include "free.h"
+
+void	bubble_sort(int *arr, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
+
+	i = -1;
+	while (++i < size - 1)
+	{
+		j = -1;
+		while (++j < size - i - 1)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+
+int	*copy_into_sorted(int *arr, int size)
+{
+	int	*sorted;
+	int	i;
+
+	i = -1;
+	sorted = (int *)malloc(sizeof(int) * size);
+	if (!sorted)
+	{
+		free(arr);
+		error_message("[MALLOC ERROR]: Can't allocate memory!");
+	}
+	while (++i < size)
+		sorted[i] = arr[i];
+	bubble_sort(sorted, size);
+	return (sorted);
+}
+
+bool	is_sorted(int *unordered, int size)
+{
+	int	i;
+
+	i = 0;
+	if (size < 2)
+		ft_free(unordered, NULL, "");
+	while (++i < size)
+	{
+		if (unordered[i] <= unordered[i - 1])
+			return (false);
+	}
+	return (true);
+}
 
 int	*get_nums(int nums_count, char **argv)
 {
@@ -40,56 +99,4 @@ int	*get_nums(int nums_count, char **argv)
 		}
 	}
 	return (nums);
-}
-
-void	swap(int *a, int *b)
-{
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-void	bubble_sort(int *arr, int size)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < size - 1)
-	{
-		j = -1;
-		while (++j < size - i - 1)
-			if (arr[j] > arr[j + 1])
-				swap(&arr[j], &arr[j + 1]);
-	}
-}
-
-void	print_array(int *arr, int size)
-{
-	int	i;
-
-	i = -1;
-	while (++i < size)
-		ft_printf("%d ", arr[i]);
-	ft_printf("\n");
-}
-
-int	*copy_into_sorted(int *arr, int size)
-{
-	int	*sorted;
-	int	i;
-
-	i = -1;
-	sorted = (int *)malloc(sizeof(int) * size);
-	if (!sorted)
-	{
-		free(arr);
-		error_message("[MALLOC ERROR]: Can't allocate memory!");
-	}
-	while (++i < size)
-		sorted[i] = arr[i];
-	bubble_sort(sorted, size);
-	return (sorted);
 }

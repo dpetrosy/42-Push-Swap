@@ -3,25 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   sortings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:37:07 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:37:08 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:22:08 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:22:10 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sortings.h"
-#include "utils.h"
+#include "ft_printf.h"
 #include "stack_actions.h"
+#include "butterfly.h"
+#include "free.h"
 
-void	forbbiden_sorting(int size, t_stack *stack_a, t_stack *stack_b)
+void	double_sort(int *unordered, int *sorted)
 {
-	if (size == 3)
-		triple_sort(stack_a);
-	else if (size == 4)
-		fourple_sort(stack_a, stack_b, size);
-	else
-		fiveple_sort(stack_a, stack_b, size);
+	ft_printf("sa\n");
+	ft_free(unordered, sorted, "");
 }
 
 void	triple_sort(t_stack *stack_a)
@@ -80,30 +78,12 @@ void	fiveple_sort(t_stack *stack_a, t_stack *stack_b, int size)
 	rotate_stack(stack_a, "ra");
 }
 
-void	find_max_and_push_b(t_lst *lst, t_stack *stack_a, int size)
+void	forbbiden_sorting(int size, t_stack *stack_a, t_stack *stack_b)
 {
-	int	i;
-	int	is_tail;
-
-	i = 0;
-	is_tail = 0;
-	while (is_tail == 0)
-	{
-		if (lst->index == size - 1)
-		{
-			if (i > size - i - 1)
-			{
-				while (i++ != size)
-					reverse_rotate_stack(stack_a, "rra");
-			}
-			else
-				while (i-- > 0)
-					rotate_stack(stack_a, "ra");
-			break ;
-		}
-		++i;
-		lst = lst->next;
-		if (lst == stack_a->head)
-			is_tail = 1;
-	}
+	if (size == 3)
+		triple_sort(stack_a);
+	else if (size == 4)
+		fourple_sort(stack_a, stack_b, size);
+	else
+		fiveple_sort(stack_a, stack_b, size);
 }

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.h                                       :+:      :+:    :+:   */
+/*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 00:20:09 by dapetros          #+#    #+#             */
-/*   Updated: 2024/03/04 00:20:10 by dapetros         ###   ########.fr       */
+/*   Created: 2024/03/04 00:20:01 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:20:04 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECK_ARGS_H
-# define CHECK_ARGS_H
+#ifndef FREE_H
+# define FREE_H
 
-void	check_duplicates(int *unordered, int size);
-void	check_num1(char *num, char **temp);
-void	check_num(char *num, char **temp, int *nums_count);
-int		get_nums_count(char **argv);
-int		check_args(int argc, char **argv);
+# include "push_swap.h"
 
-#endif   /* CHECK_ARGS_H */
+void	ft_free(int *unordered, int *sorted, char *sms);
+void	free_matrix(char **matrix, int size);
+void	free_and_exit(char **matrix, int size, char *sms);
+void	free_list_and_exit(t_stack *stack, int *arrays[], int i);
+void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2);
+
+#endif   /* FREE_H */

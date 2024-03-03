@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:38:45 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:38:46 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:19:49 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:19:51 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-# include "libft.h"
-# include "ft_printf.h"
 
 typedef struct s_lst
 {

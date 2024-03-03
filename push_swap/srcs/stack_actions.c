@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   stack_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:37:19 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:37:20 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:22:04 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:23:17 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "stack_actions.h"
+#include "ft_printf.h"
 #include "utils.h"
+#include "free.h"
 
 void	swap_stack(t_stack *stack, char *action)
 {
@@ -73,7 +76,7 @@ void	push_stack(t_stack *from, t_stack *to, char *action)
 void	push_stack_2(t_stack *from, char *action)
 {
 	if (from->nodes == 1)
-	{	
+	{
 		free(from->head);
 		from->head = NULL;
 		from->tail = NULL;

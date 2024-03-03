@@ -1,6 +1,7 @@
 NAME			:= push_swap
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror
+CFLAGS			:= -Wall -Wextra -Werror -g -fsanitize=address
+INCLUDES_DIR 	:= -I$(INCLUDES_DIR) -Ilibft -Ift_printf/includes
 INCLUDES 		:= -Iincludes -Ilibft -Ift_printf/includes
 SRCS_DIR		:= srcs
 SRCS			:= $(wildcard $(SRCS_DIR)/*.c)
@@ -39,7 +40,7 @@ $(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_FLAGS) $(FT_PRINTF_FLAGS) -o $(NAME)
 	@echo $(YELLOW) " - Compiling FINISHED" $(RESET)
 
-$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c | $(OBJS_DIR)
+$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c $(INCLUDES_DIR)/%.h | $(OBJS_DIR)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJS_DIR) :

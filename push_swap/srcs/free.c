@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:37:43 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:37:44 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:22:23 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:22:25 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "utils.h"
-#include "sortings.h"
+#include "free.h"
 
-void	init_stack_b(t_stack *st_b, int **sorted)
+void	ft_free(int *unordered, int *sorted, char *sms)
 {
-	st_b->head = NULL;
-	st_b->tail = NULL;
-	st_b->nodes = 0;
-	*sorted = NULL;
+	free(unordered);
+	free(sorted);
+	error_message(sms);
 }
 
-void	double_sort(int *unordered, int *sorted)
+void	free_matrix(char **matrix, int size)
 {
-	ft_printf("sa\n");
-	ft_free(unordered, sorted, "");
+	--size;
+	while (size >= 0)
+	{
+		free(matrix[size]);
+		matrix[size] = NULL;
+		--size;
+	}
+	free(matrix);
+	matrix = NULL;
+}
+
+void	free_and_exit(char **matrix, int size, char *sms)
+{
+	free_matrix(matrix, size);
+	error_message(sms);
 }
 
 void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
@@ -33,10 +46,8 @@ void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
 	t_lst	*temp;
 
 	j = -1;
-	if (arrays[0] != NULL)
-		free(arrays[0]);
-	if (arrays[1] != NULL)
-		free(arrays[1]);
+	free(arrays[0]);
+	free(arrays[1]);
 	while (++j < i)
 	{
 		temp = stack->head->next;
@@ -44,21 +55,6 @@ void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
 		stack->head = temp;
 	}
 	error_message("[MALLOC ERROR]: List allocation error!");
-}
-
-int	is_sorted(int *unordered, int size)
-{
-	int	i;
-
-	i = 0;
-	if (size < 2)
-		ft_free(unordered, NULL, "");
-	while (++i < size)
-	{
-		if (unordered[i] <= unordered[i - 1])
-			return (1);
-	}
-	return (0);
 }
 
 void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
@@ -73,7 +69,7 @@ void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 		st_a->head = st_a->head->next;
 		free(temp);
 	}
-	if (st_b->head != NULL)
+	if (st_b->head)
 	{
 		i = -1;
 		while (++i < st_a->nodes)
@@ -83,8 +79,6 @@ void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 			free(temp);
 		}
 	}
-	if (a1 != NULL)
-		free(a1);
-	if (a1 != NULL)
-		free(a2);
+	free(a1);
+	free(a2);
 }

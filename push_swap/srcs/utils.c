@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:37:32 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:37:33 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 00:22:00 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 00:22:01 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+#include "libft.h"
 #include "utils.h"
+#include "free.h"
+
+void	init_stack(t_stack *st_b, int **sorted)
+{
+	st_b->head = NULL;
+	st_b->tail = NULL;
+	st_b->nodes = 0;
+	*sorted = NULL;
+}
 
 void	error_message(char *sms)
 {
@@ -18,38 +29,30 @@ void	error_message(char *sms)
 	exit(EXIT_FAILURE);
 }
 
-void	free_matrix(char **matrix, int size)
-{
-	size = size - 1;
-	while (size >= 0)
-	{
-		free(matrix[size]);
-		--size;
-	}
-	free(matrix);
-}
-
 int	get_matrix_size(char **matrix)
 {
 	int	i;
 
-	i = -1;
-	while (matrix[++i])
-		;
+	i = 0;
+	while (matrix[i])
+		++i;
 	return (i + 1);
 }
 
-void	free_and_exit(char **matrix, int size, char *sms)
+int	generate_chunk(int size)
 {
-	free_matrix(matrix, size);
-	error_message(sms);
-}
+	int	chunk;
 
-void	ft_free(int *unordered, int *sorted, char *sms)
-{
-	if (unordered != NULL)
-		free(unordered);
-	if (sorted != NULL)
-		free(sorted);
-	error_message(sms);
+	chunk = 1;
+	if (size < 50)
+		chunk = 3 + (size - 6) / 7;
+	else if (size >= 50 && size < 100)
+		chunk = 10 + (size - 50) / 8;
+	else if (size >= 100 && size < 350)
+		chunk = 18 + (size - 100) / 9;
+	else if (size >= 350 && size <= 500)
+		chunk = 27 + (size - 350) / 15;
+	else if (size > 500)
+		chunk = 37 + (size - 500) / 20;
+	return (chunk);
 }
