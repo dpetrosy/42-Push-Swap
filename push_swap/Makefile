@@ -81,7 +81,7 @@ $(CHECKER_NAME) : $(OBJS_BONUS)
 	@echo $(CYAN) " - Making printf..." $(RESET)
 	@$(MAKE) $(FT_PRINTF_DIR)
 	@echo $(YELLOW) " - Made printf!" $(RESET)
-	@echo $(GREEN) " - Compiling $(NAME)..." $(RESET)
+	@echo $(GREEN) " - Compiling $(CHECKER_NAME)..." $(RESET)
 	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_FLAGS) $(FT_PRINTF_FLAGS) -o $(CHECKER_NAME)
 	@echo $(YELLOW) " - Compiling FINISHED" $(RESET)
 
