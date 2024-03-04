@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_actions_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:42:55 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:42:58 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:39:26 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:40:16 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "stack_actions_bonus.h"
 #include "utils_bonus.h"
 
@@ -40,39 +41,10 @@ void	reverse_rotate_stack(t_stack *stack)
 	stack->tail = stack->tail->prev;
 }
 
-void	push_stack(t_stack *from, t_stack *to)
-{
-	t_lst	*new_lst;
-
-	if (from->head == NULL)
-		return ;
-	new_lst = malloc(sizeof(t_lst));
-	if (!new_lst)
-		error_message("[MALLOC ERROR]: dynamic memory allocation error!");
-	++to->nodes;
-	new_lst->value = from->head->value;
-	if (to->head == NULL)
-	{
-		new_lst->next = NULL;
-		new_lst->prev = NULL;
-		to->head = new_lst;
-		to->tail = new_lst;
-	}
-	else
-	{
-		new_lst->next = to->head;
-		new_lst->prev = to->tail;
-		to->head->prev = new_lst;
-		to->head = new_lst;
-		to->tail->next = to->head;
-	}
-	push_stack_2(from);
-}
-
 void	push_stack_2(t_stack *from)
 {
 	if (from->nodes == 1)
-	{	
+	{
 		free(from->head);
 		from->head = NULL;
 		from->tail = NULL;
@@ -92,4 +64,33 @@ void	push_stack_2(t_stack *from)
 		from->head = from->tail->next;
 	}
 	--from->nodes;
+}
+
+void	push_stack(t_stack *from, t_stack *to)
+{
+	t_lst	*new_lst;
+
+	if (!from->head)
+		return ;
+	new_lst = malloc(sizeof(t_lst));
+	if (!new_lst)
+		error_message("Error\n");
+	++to->nodes;
+	new_lst->value = from->head->value;
+	if (!to->head)
+	{
+		new_lst->next = NULL;
+		new_lst->prev = NULL;
+		to->head = new_lst;
+		to->tail = new_lst;
+	}
+	else
+	{
+		new_lst->next = to->head;
+		new_lst->prev = to->tail;
+		to->head->prev = new_lst;
+		to->head = new_lst;
+		to->tail->next = to->head;
+	}
+	push_stack_2(from);
 }

@@ -3,36 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:41:54 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:41:55 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:38:58 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:39:00 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include <stdlib.h>
+#include "ft_printf.h"
 #include "get_next_line_bonus.h"
-#include "utils_bonus.h"
 #include "stack_actions_bonus.h"
+#include "checker_bonus.h"
+#include "free_bonus.h"
+#include "utils_bonus.h"
+#include "libft.h"
 
-void	checker(t_stack *st_a, t_stack *st_b)
+void	sorted_exit(t_stack *st_a, t_stack *st_b, char *sms)
 {
-	char	*inst;
+	free_stacks(st_a, st_b);
+	ft_printf("%s\n", sms);
+	exit(EXIT_SUCCESS);
+}
 
-	inst = get_next_line(0);
-	while (inst)
+void	is_sorted_stack(t_stack *st_a, t_stack *st_b)
+{
+	t_lst	*temp;
+
+	if (st_b->nodes > 0)
+		sorted_exit(st_a, st_b, "KO");
+	if (st_a->nodes == 1)
+		sorted_exit(st_a, st_b, "OK");
+	temp = st_a->head;
+	while (temp != st_a->tail)
 	{
-		if (check_inst(inst) == 1)
-		{
-			free_stacks(st_a, st_b);
-			error_message("[INSTRUCTION ERROR]\n");
-		}
-		do_inst(inst, st_a, st_b);
-		if (inst != NULL)
-			free(inst);
-		inst = get_next_line(0);
+		if (temp->value >= temp->next->value)
+			sorted_exit(st_a, st_b, "KO");
+		temp = temp->next;
 	}
-	is_sorted_stack(st_a, st_b);
+	sorted_exit(st_a, st_b, "OK");
+}
+
+void	do_inst(char *inst, t_stack *st_a, t_stack *st_b)
+{
+	if (ft_strncmp(inst, "sa\n", 3) == 0)
+		swap_stack(st_a);
+	else if (ft_strncmp(inst, "sb\n", 3) == 0)
+		swap_stack(st_b);
+	else if (ft_strncmp(inst, "ss\n", 3) == 0)
+		ss_stacks(st_a, st_b);
+	else if (ft_strncmp(inst, "pa\n", 3) == 0)
+		push_stack(st_b, st_a);
+	else if (ft_strncmp(inst, "pb\n", 3) == 0)
+		push_stack(st_a, st_b);
+	else if (ft_strncmp(inst, "ra\n", 3) == 0)
+		rotate_stack(st_a);
+	else if (ft_strncmp(inst, "rb\n", 3) == 0)
+		rotate_stack(st_b);
+	else if (ft_strncmp(inst, "rr\n", 3) == 0)
+		rr_stacks(st_a, st_b);
+	else if (ft_strncmp(inst, "rra\n", 4) == 0)
+		reverse_rotate_stack(st_a);
+	else if (ft_strncmp(inst, "rrb\n", 4) == 0)
+		reverse_rotate_stack(st_b);
+	else if (ft_strncmp(inst, "rrr\n", 4) == 0)
+		rrr_stacks(st_a, st_b);
 }
 
 int	check_inst(char *inst)
@@ -62,53 +97,21 @@ int	check_inst(char *inst)
 	return (1);
 }
 
-void	do_inst(char *inst, t_stack *st_a, t_stack *st_b)
+void	checker(t_stack *st_a, t_stack *st_b)
 {
-	if (ft_strncmp(inst, "sa\n", 3) == 0)
-		swap_stack(st_a);
-	else if (ft_strncmp(inst, "sb\n", 3) == 0)
-		swap_stack(st_b);
-	else if (ft_strncmp(inst, "ss\n", 3) == 0)
-		ss_stacks(st_a, st_b);
-	else if (ft_strncmp(inst, "pa\n", 3) == 0)
-		push_stack(st_b, st_a);
-	else if (ft_strncmp(inst, "pb\n", 3) == 0)
-		push_stack(st_a, st_b);
-	else if (ft_strncmp(inst, "ra\n", 3) == 0)
-		rotate_stack(st_a);
-	else if (ft_strncmp(inst, "rb\n", 3) == 0)
-		rotate_stack(st_b);
-	else if (ft_strncmp(inst, "rr\n", 3) == 0)
-		rr_stacks(st_a, st_b);
-	else if (ft_strncmp(inst, "rra\n", 4) == 0)
-		reverse_rotate_stack(st_a);
-	else if (ft_strncmp(inst, "rrb\n", 4) == 0)
-		reverse_rotate_stack(st_b);
-	else if (ft_strncmp(inst, "rrr\n", 4) == 0)
-		rrr_stacks(st_a, st_b);
-}
+	char	*inst;
 
-void	is_sorted_stack(t_stack *st_a, t_stack *st_b)
-{
-	t_lst	*temp;
-
-	if (st_b->nodes > 0)
-		sorted_exit(st_a, st_b, "KO");
-	if (st_a->nodes == 1)
-		sorted_exit(st_a, st_b, "OK");
-	temp = st_a->head;
-	while (temp != st_a->tail)
+	inst = get_next_line(0);
+	while (inst)
 	{
-		if (temp->value >= temp->next->value)
-			sorted_exit(st_a, st_b, "KO");
-		temp = temp->next;
+		if (check_inst(inst) == 1)
+		{
+			free_stacks(st_a, st_b);
+			error_message("Error\n");
+		}
+		do_inst(inst, st_a, st_b);
+		free(inst);
+		inst = get_next_line(0);
 	}
-	sorted_exit(st_a, st_b, "OK");
-}
-
-void	sorted_exit(t_stack *st_a, t_stack *st_b, char *sms)
-{
-	free_stacks(st_a, st_b);
-	ft_printf("%s\n", sms);
-	exit(EXIT_SUCCESS);
+	is_sorted_stack(st_a, st_b);
 }

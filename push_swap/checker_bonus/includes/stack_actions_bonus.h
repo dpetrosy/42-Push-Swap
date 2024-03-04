@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_actions_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:40:40 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:40:43 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:37:13 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:37:16 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 void	swap_stack(t_stack *stack);
 void	rotate_stack(t_stack *stack);
 void	reverse_rotate_stack(t_stack *stack);
-void	push_stack(t_stack *from, t_stack *to);
 void	push_stack_2(t_stack *from);
+void	push_stack(t_stack *from, t_stack *to);
 void	ss_stacks(t_stack *st_a, t_stack *st_b);
 void	rr_stacks(t_stack *st_a, t_stack *st_b);
 void	rrr_stacks(t_stack *st_a, t_stack *st_b);

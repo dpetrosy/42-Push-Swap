@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:43:26 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:43:27 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:39:31 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:39:33 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "utils_bonus.h"
+#include "libft.h"
+
+void	init_stacks(t_stack *st_a, t_stack *st_b)
+{
+	st_a->head = NULL;
+	st_a->tail = NULL;
+	st_a->nodes = 0;
+	st_b->head = NULL;
+	st_b->tail = NULL;
+	st_b->nodes = 0;
+}
 
 void	error_message(char *sms)
 {
@@ -18,38 +30,12 @@ void	error_message(char *sms)
 	exit(EXIT_FAILURE);
 }
 
-void	free_matrix(char **matrix, int size)
-{
-	size = size - 1;
-	while (size >= 0)
-	{
-		free(matrix[size]);
-		--size;
-	}
-	free(matrix);
-}
-
 int	get_matrix_size(char **matrix)
 {
 	int	i;
 
-	i = -1;
-	while (matrix[++i])
-		;
+	i = 0;
+	while (matrix[i])
+		++i;
 	return (i + 1);
-}
-
-void	free_and_exit(char **matrix, int size, char *sms)
-{
-	free_matrix(matrix, size);
-	error_message(sms);
-}
-
-void	ft_free(int *unordered, int *sorted, char *sms)
-{
-	if (unordered != NULL)
-		free(unordered);
-	if (sorted != NULL)
-		free(sorted);
-	error_message(sms);
 }

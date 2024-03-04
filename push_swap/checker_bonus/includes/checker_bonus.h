@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:39:57 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:39:59 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:36:26 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:36:33 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "push_swap_bonus.h"
 
-void	checker(t_stack *st_a, t_stack *st_b);
-int		check_inst(char *inst);
-void	do_inst(char *inst, t_stack *st_a, t_stack *st_b);
-void	is_sorted_stack(t_stack *st_a, t_stack *st_b);
 void	sorted_exit(t_stack *st_a, t_stack *st_b, char *sms);
+void	is_sorted_stack(t_stack *st_a, t_stack *st_b);
+void	do_inst(char *inst, t_stack *st_a, t_stack *st_b);
+int		check_inst(char *inst);
+void	checker(t_stack *st_a, t_stack *st_b);
 
 #endif	/* CHECKER_BONUS_H */

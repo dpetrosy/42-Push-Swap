@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:42:22 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:42:24 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:39:12 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:39:14 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "push_swap_bonus.h"
+#include "utils_bonus.h"
 #include "check_args_bonus.h"
 #include "make_stack_bonus.h"
-#include "utils_bonus.h"
-#include "stack_actions_bonus.h"
 #include "checker_bonus.h"
 
 int	main(int argc, char **argv)

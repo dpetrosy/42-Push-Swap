@@ -6,7 +6,7 @@
 /*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:54:29 by dapetros          #+#    #+#             */
-/*   Updated: 2024/01/25 20:54:35 by dapetros         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:30:20 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_putstr(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*printf_strchr(const char *s, int c)
 {
 	size_t	i;
 

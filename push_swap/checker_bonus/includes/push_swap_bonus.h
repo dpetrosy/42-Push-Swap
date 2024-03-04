@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpetrosy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 19:40:32 by dpetrosy          #+#    #+#             */
-/*   Updated: 2022/08/23 19:40:34 by dpetrosy         ###   ########.fr       */
+/*   Created: 2024/03/04 18:37:02 by dapetros          #+#    #+#             */
+/*   Updated: 2024/03/04 18:37:09 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_BONUS_H
 # define PUSH_SWAP_BONUS_H
-
-# include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line_bonus.h"
 
 typedef struct s_lst
 {

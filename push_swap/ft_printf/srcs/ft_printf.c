@@ -53,7 +53,7 @@ int	ft_printf(const char *str, ...)
 	spf = "cspdiuxX%";
 	while (str[i])
 	{
-		if (str[i] == '%' && ft_strchr(spf, str[i + 1]))
+		if (str[i] == '%' && printf_strchr(spf, str[i + 1]))
 		{
 			count += print_spf(str[i + 1], ap);
 			++i;
