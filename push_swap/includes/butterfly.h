@@ -6,7 +6,7 @@
 /*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 00:20:14 by dapetros          #+#    #+#             */
-/*   Updated: 2024/03/04 00:20:16 by dapetros         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:16:19 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,4 @@ void	sort_stack(t_stack *st_a, t_stack *st_b);
 void	make_butterfly(t_stack *st_a, t_stack *st_b, int chunk);
 void	butterfly_algo(t_stack *st_a, t_stack *st_b, int size);
 
-#endif
+#endif  /* BUTTERFLY_H */

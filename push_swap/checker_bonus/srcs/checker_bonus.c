@@ -6,7 +6,7 @@
 /*   By: dapetros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:38:58 by dapetros          #+#    #+#             */
-/*   Updated: 2024/03/04 18:39:00 by dapetros         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:47:06 by dapetros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	do_inst(char *inst, t_stack *st_a, t_stack *st_b)
 
 int	check_inst(char *inst)
 {
+	if (inst[0] == '\0')
+		return (2);
 	if (ft_strncmp(inst, "sa\n", 3) == 0)
 		return (0);
 	if (ft_strncmp(inst, "sb\n", 3) == 0)
@@ -104,6 +106,8 @@ void	checker(t_stack *st_a, t_stack *st_b)
 	inst = get_next_line(0);
 	while (inst)
 	{
+		if (check_inst(inst) == 2)
+			break ;
 		if (check_inst(inst) == 1)
 		{
 			free_stacks(st_a, st_b);
