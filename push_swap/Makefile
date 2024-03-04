@@ -62,13 +62,13 @@ $(OBJS_DIR) :
 
 clean :
 	@$(RM) $(OBJS_DIR)
-	@echo $(RED) " - Cleaned!" $(RESET)
+	@echo $(RED) " - Main Part Cleaned!" $(RESET)
 
 fclean : clean
 	@$(RM) $(NAME)
 	@$(MAKE) $(LIBFT_DIR) fclean
 	@$(MAKE) $(FT_PRINTF_DIR) fclean
-	@echo $(RED) " - Full Cleaned!" $(RESET)
+	@echo $(RED) " - Main Part Full Cleaned!" $(RESET)
 
 re: fclean all
 
@@ -93,14 +93,16 @@ $(OBJS_DIR_BONUS) :
 
 clean_bonus :
 	@$(RM) $(OBJS_DIR_BONUS)
-	@echo $(RED) " - Cleaned!" $(RESET)
+	@echo $(RED) " - Bonus Part Cleaned!" $(RESET)
 
 fclean_bonus : clean_bonus
 	@$(RM) $(CHECKER_NAME)
 	@$(MAKE) $(LIBFT_DIR) fclean
 	@$(MAKE) $(FT_PRINTF_DIR) fclean
-	@echo $(RED) " - Full Cleaned!" $(RESET)
+	@echo $(RED) " - Bonus Part Full Cleaned!" $(RESET)
 
 re_bonus : fclean_bonus bonus
 
-.PHONY: all clean fclean re bonus clean_bonus fclean_bonus re_bonus
+fclean_all : fclean fclean_bonus
+
+.PHONY: all clean fclean re bonus clean_bonus fclean_bonus re_bonus fclean_all
