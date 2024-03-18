@@ -26,7 +26,11 @@
   <h3>
       <a href="#-about-project">📜 About Project</a>
     <span> · </span>
-      <a href="#-supported-specifiers">📑 Supported Specifiers</a>
+      <a href="#-operations-list">📑 Operations List</a>
+    <span> · </span>
+	  <a href="#-algorithm">🧮 Algorithm</a>
+    <span> · </span>
+	  <a href="#-bonus-part">🌟 Bonus Part</a>
     <span> · </span>
       <a href="#-usage">👨‍💻 Usage</a>
   </h3>
@@ -81,6 +85,21 @@ The possible operations are:
 | `rrr` | reverse rotate a + reverse rotate b | both `rra` and `rrb`                                   |
 
 ## 🧮 Algorithm
+
+I use `Butterfly` algorithm for sorting. Here is a short description:
+
+* First, need to generate a chunk number.
+* After I iterate through stack A look for a number, whose index is smaller than the counter (numbers count in stack B).
+* If I find that number, I do `pb` and `rb`.
+* If no, I check if the number is smaller than counter + chunk, and do only `pb`.
+* Repeat these operations until stack A becomes empty.
+* In stack B we will have numbers in order like 90-degree rotated butterfly 🦋.
+* After that, I will iterate through stack B and push the maximum index in stack A (i.e. `pa`) until stack B becomes empty.
+* After these operations, stack A becomes sorted.
+
+The chunk number must be different depending on the numbers count. \
+So need to experiment with chunk number to achieve the best operations count. \
+For more information about the algorithm see <a href="https://www.youtube.com/watch?v=GA9aKzl86nA&ab_channel=Edu_events_mow"><b>this video</b></a>.
 
 ## 🌟 Bonus Part
 * The Bonus exercise was to write a program called 'checker' that can read the operations from stdin and perform them on a stack of numbers.
