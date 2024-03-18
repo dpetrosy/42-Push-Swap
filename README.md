@@ -55,7 +55,7 @@ For detailed information, refer to the [**subject of this project**](README_file
 
 	🚀 TLDR: Given a set of integers, sort it using a predefined set of operations using 
  		 two stacks. The operations list is defined below. This program outputs a 
-    		 program in push_swap operations that sorts the input integers.
+   		 program in push_swap operations that sorts the input integers.
 
 > [!NOTE]  
 > Because of 42 School norm requirements:
