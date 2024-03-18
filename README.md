@@ -99,7 +99,8 @@ I use `Butterfly` algorithm for sorting. Here is a short description:
 
 The chunk number must be different depending on the numbers count. \
 So need to experiment with chunk number to achieve the best operations count. \
-For more information about the algorithm see <a href="https://www.youtube.com/watch?v=GA9aKzl86nA&ab_channel=Edu_events_mow"><b>this video</b></a>.
+For more information about the algorithm see <a href="https://www.youtube.com/watch?v=GA9aKzl86nA&ab_channel=Edu_events_mow"><b>this video</b></a>. \
+Also, you can visualize algorithm work by this <a href="https://push-swap-visualizer.vercel.app/"><b>visualizer</b></a>.
 
 ## 🌟 Bonus Part
 * The Bonus exercise was to write a program called 'checker' that can read the operations from stdin and perform them on a stack of numbers.
@@ -109,27 +110,36 @@ For more information about the algorithm see <a href="https://www.youtube.com/wa
 ## 👨‍💻 Usage
 ### Requirements
 
-The library is written in C language and thus needs the **gcc compiler** and some standard **C libraries** to run.
+The program is written in C language and thus needs the **gcc compiler** and some standard **C libraries** to run.
 
 ### Instructions
 
-**1. Compiling the library**
+**1. Compiling the program**
 
-To compile the library, run:
+To compile the program, run:
 
 ```shell
-$ cd path/to/printf && make
+$ cd path/to/push_swap && make
 ```
 
-**2. Using it in your code**
+To compile the checker, run:
 
-To use the library functions in your code, simply include its header:
+```shell
+$ cd path/to/push_swap && make bonus
+```
 
+**2. How to run the program**
+
+Call the executable together with the set of numbers separated by a space:
 ```C
-#include "ft_printf.h"
+./push_swap 5 7 10 4 6 8 9 2 1 3
 ```
-and, when compiling your code, add the required flags:
-
+To run the checker on push_swap, use the pipe:
 ```shell
--lftprintf -L path/to/libftprintf.a -I path/to/ft_printf.h
+ARG="5 7 10 4 6 8 9 2 1 3"; ./push_swap $ARG | ./checker $ARG
+```
+
+Use `clean` to delete all object files, `fclean` to remove all object files and executable, and `re` to recompile the program:
+```shell
+make clean / make fclean / make re
 ```
