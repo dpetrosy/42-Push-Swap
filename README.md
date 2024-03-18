@@ -140,7 +140,7 @@ To run the checker on push_swap, use the pipe:
 ARG="5 7 10 4 6 8 9 2 1 3"; ./push_swap $ARG | ./checker $ARG
 ```
 
-Use `clean` to delete all object files, `fclean` to remove all object files and executable, and `re` to recompile the program:
+Use `clean` to delete all object files, `fclean` to remove executable and all object files, and `re` to recompile the program:
 ```shell
 make clean / make fclean / make re
 ```
