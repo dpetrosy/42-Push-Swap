@@ -131,7 +131,7 @@ $ cd path/to/push_swap && make bonus
 **2. How to run the program**
 
 Run the executable together with the set of numbers separated by a space:
-```C
+```shell
 ./push_swap 5 7 10 4 6 8 9 2 1 3
 ```
 
