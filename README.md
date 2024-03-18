@@ -51,7 +51,7 @@ You have at your disposal a set of int values, 2 stacks and a set of operations 
 
 * You are allowed to use the following functions: malloc, free, exit, write, read.
 
-For detailed information, refer to the [**subject of this project**](README_files/printf_subject.pdf).
+For detailed information, refer to the [**subject of this project**](README_files/push_swap_subject.pdf).
 
 	🚀 TLDR: Given a set of integers, sort it using a predefined set of operations using
  		 two stacks. The operations list is defined below. This program outputs a program
