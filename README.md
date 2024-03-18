@@ -134,6 +134,7 @@ Run the executable together with the set of numbers separated by a space:
 ```C
 ./push_swap 5 7 10 4 6 8 9 2 1 3
 ```
+
 To run the checker on push_swap, use the pipe:
 ```shell
 ARG="5 7 10 4 6 8 9 2 1 3"; ./push_swap $ARG | ./checker $ARG
